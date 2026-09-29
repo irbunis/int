@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="phone">
+    <!-- Статус-бар -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <span>● ● ▰</span>
+    </div>
+
+    <!-- ==================== -->
+    <!-- ГЛАВНАЯ -->
+    <!-- ==================== -->
+    <section id="home" class="screen active">
+        <div class="header">
+            <div>
+                <h1>Добрый день,<br>Иван!</h1>
+                <p>Сегодня прекрасный день</p>
+            </div>
+            <button class="icon-button">🔔</button>
+        </div>
+
+        <div class="section-title">
+            <h2>Сегодня</h2>
+            <span>4 задачи</span>
+        </div>
+
+        <div class="task">
+            <button class="check"></button>
+            <div class="task-info">
+                <strong>Подготовить презентацию</strong>
+                <div>
+                    <span class="tag study">Учёба</span>
+                    <span class="time">18:00</span>
+                </div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="task">
+            <button class="check"></button>
+            <div class="task-info">
+                <strong>Сделать домашнее задание</strong>
+                <div>
+                    <span class="tag study">Учёба</span>
+                    <span class="time">20:00</span>
+                </div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="task">
+            <button class="check"></button>
+            <div class="task-info">
+                <strong>Купить продукты</strong>
+                <div>
+                    <span class="tag home">Дом</span>
+                    <span class="time">16:00</span>
+                </div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <div class="task">
+            <button class="check"></button>
+            <div class="task-info">
+                <strong>Позвонить преподавателю</strong>
+                <div>
+                    <span class="tag personal">Личное</span>
+                    <span class="time">15:00</span>
+                </div>
+            </div>
+            <span>›</span>
+        </div>
+
+        <!-- Сюда будут добавляться новые задачи -->
+        <div id="newTasks"></div>
+
+        <button class="add-button" onclick="showScreen('add')">+</button>
+    </section>
+
+    <!-- ==================== -->
+    <!-- КАЛЕНДАРЬ -->
+    <!-- ==================== -->
+    <section id="calendar" class="screen">
+        <h1>Календарь</h1>
+        <div class="calendar-header">
+            <button>‹</button>
+            <strong>Сентябрь 2026</strong>
+            <button>›</button>
+        </div>
+        <div class="week">
+            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+        </div>
+        <div class="days">
+            <span>28</span><span class="selected">29</span><span>30</span><span>1</span><span>2</span><span>3</span><span>4</span>
+            <span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+            <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+            <span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
+            <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>1</span><span>2</span>
+        </div>
+        <h2 class="date-title">29 сентября</h2>
+
+        <div class="calendar-task">
+            <b>15:00</b>
+            <div>
+                <span class="tag study">Учёба</span>
+                <p>Подготовить презентацию</p>
+            </div>
+        </div>
+        <div class="calendar-task">
+            <b>17:00</b>
+            <div>
+                <span class="tag work">Работа</span>
+                <p>Встреча с клиентом</p>
+            </div>
+        </div>
+        <div class="calendar-task">
+            <b>20:00</b>
+            <div>
+                <span class="tag home">Покупки</span>
+                <p>Купить продукты</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- НОВАЯ ЗАДАЧА -->
+    <!-- ==================== -->
+    <section id="add" class="screen">
+        <div class="back" onclick="showScreen('home')">‹</div>
+        <h1>Новая задача</h1>
+
+        <label>Название задачи *</label>
+        <input type="text" id="taskTitle" placeholder="Например, Подготовить презентацию">
+
+        <label>Описание</label>
+        <textarea id="taskDesc" placeholder="Добавьте подробности..."></textarea>
+
+        <label>Дата</label>
+        <input type="text" id="taskDate" value="29 сентября 2026">
+
+        <label>Время</label>
+        <input type="text" id="taskTime" value="18:00">
+
+        <label>Категория</label>
+        <select id="taskCat">
+            <option>📚 Учёба</option>
+            <option>💼 Работа</option>
+            <option>🏠 Дом</option>
+            <option>⭐ Личное</option>
+        </select>
+
+        <label>Приоритет</label>
+        <select id="taskPriority">
+            <option>🚩 Высокий</option>
+            <option>Средний</option>
+            <option>Низкий</option>
+        </select>
+
+        <label>Напоминание</label>
+        <select id="taskRemind">
+            <option>🔔 За 2 часа</option>
+            <option>За 1 час</option>
+            <option>За 30 минут</option>
+        </select>
+
+        <button class="create-button">Создать задачу</button>
+    </section>
+
+    <!-- ==================== -->
+    <!-- СТАТИСТИКА -->
+    <!-- ==================== -->
+    <section id="stats" class="screen">
+        <h1>Статистика</h1>
+        <div class="progress-circle">
+            <div>
+                <strong>82%</strong>
+                <span>Выполнено задач</span>
+            </div>
+        </div>
+        <div class="stats-row">
+            <div><strong>24</strong><span>Выполнено</span></div>
+            <div><strong>5</strong><span>Осталось</span></div>
+            <div><strong>30</strong><span>Всего</span></div>
+        </div>
+        <h2>По категориям</h2>
+        <div class="stat-item"><span>🔵 Учёба</span><b>42%</b></div>
+        <div class="bar"><div style="width:42%"></div></div>
+        <div class="stat-item"><span>🟢 Работа</span><b>29%</b></div>
+        <div class="bar green"><div style="width:29%"></div></div>
+        <div class="stat-item"><span>🟡 Дом</span><b>17%</b></div>
+        <div class="bar yellow"><div style="width:17%"></div></div>
+        <div class="stat-item"><span>🟣 Личное</span><b>12%</b></div>
+        <div class="bar purple"><div style="width:12%"></div></div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- ПРОФИЛЬ -->
+    <!-- ==================== -->
+    <section id="profile" class="screen">
+        <div class="profile">
+            <div class="avatar">AA</div>
+            <div>
+                <h2>Анастасия Иванова</h2>
+                <p>anastasia@mail.ru</p>
+            </div>
+        </div>
+
+        <div class="settings">
+            <div class="setting">
+                <span>🔔</span>
+                <div>
+                    <strong>Уведомления</strong>
+                    <small>Настройка уведомлений</small>
+                </div>
+                <input type="checkbox" checked>
+            </div>
+
+            <div class="setting">
+                <span>🌙</span>
+                <div>
+                    <strong>Тёмная тема</strong>
+                    <small>Сменить тему</small>
+                </div>
+                <input type="checkbox" id="themeSwitch">
+            </div>
+
+            <div class="setting">
+                <span>📅</span>
+                <div>
+                    <strong>Первый день недели</strong>
+                    <small>Понедельник</small>
+                </div>
+                <span>›</span>
+            </div>
+
+            <div class="setting">
+                <span>🔊</span>
+                <div>
+                    <strong>Звуки уведомлений</strong>
+                    <small>Включить звуки</small>
+                </div>
+                <input type="checkbox" checked>
+            </div>
+
+            <hr>
+
+            <div class="setting">
+                <span>ⓘ</span>
+                <strong>О приложении</strong>
+                <span>›</span>
+            </div>
+            <div class="setting">
+                <span>❓</span>
+                <strong>Помощь</strong>
+                <span>›</span>
+            </div>
+            <div class="setting">
+                <span>🔒</span>
+                <strong>Политика конфиденциальности</strong>
+                <span>›</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- НИЖНЕЕ МЕНЮ -->
+    <!-- ==================== -->
+    <nav class="bottom-nav">
+        <button onclick="showScreen('home')">🏠<small>Главная</small></button>
+        <button onclick="showScreen('calendar')">📅<small>Календарь</small></button>
+        <button onclick="showScreen('stats')">📊<small>Статистика</small></button>
+        <button onclick="showScreen('profile')">👤<small>Профиль</small></button>
+    </nav>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
